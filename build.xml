@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="jar" name="co-clustering">
+    <property environment="env"/>
+    <property name="MyHadoopProject.location" value="../MyHadoopProject"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="co-clustering.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/hadoop-common-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-auth-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-crypto-1.0.0-Intel.jar"/>
+        <pathelement location="lib/hadoop-annotations-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-archives-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-datajoin-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-distcp-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-extras-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-gridmix-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-hdfs-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-app-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-common-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-core-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-hs-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-hs-plugins-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-jobclient-2.0.4-Intel-tests.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-jobclient-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-client-shuffle-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-mapreduce-examples-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-rumen-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-streaming-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-api-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-applications-distributedshell-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-applications-unmanaged-am-launcher-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-client-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-common-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-server-common-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-server-nodemanager-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-server-resourcemanager-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-server-tests-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-server-web-proxy-2.0.4-Intel.jar"/>
+        <pathelement location="lib/hadoop-yarn-site-2.0.4-Intel.jar"/>
+        <pathelement location="lib/pig-withouthadoop.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="co-clustering.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <!--ant antfile="build.xml" dir="${MyHadoopProject.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${MyHadoopProject.location}" inheritAll="false" target="build"/-->
+    </target>
+
+	<target name="jar" depends="build">
+		<jar destfile="/home/erez/Workspace/cc.jar">
+			<manifest>
+				<attribute name="made-by" value="lefele"/>
+				<!--attribute name="Class-Path" value=". cc_lib/hadoop-common-2.0.4-Intel.jar cc_lib/hadoop-auth-2.0.4-Intel.jar cc_lib/hadoop-crypto-1.0.0-Intel.jar cc_lib/hadoop-annotations-2.0.4-Intel.jar cc_lib/hadoop-archives-2.0.4-Intel.jar cc_lib/hadoop-datajoin-2.0.4-Intel.jar cc_lib/hadoop-distcp-2.0.4-Intel.jar cc_lib/hadoop-extras-2.0.4-Intel.jar cc_lib/hadoop-gridmix-2.0.4-Intel.jar cc_lib/hadoop-hdfs-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-app-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-common-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-core-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-hs-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-hs-plugins-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-jobclient-2.0.4-Intel-tests.jar cc_lib/hadoop-mapreduce-client-jobclient-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-client-shuffle-2.0.4-Intel.jar cc_lib/hadoop-mapreduce-examples-2.0.4-Intel.jar cc_lib/hadoop-rumen-2.0.4-Intel.jar cc_lib/hadoop-streaming-2.0.4-Intel.jar cc_lib/hadoop-yarn-api-2.0.4-Intel.jar cc_lib/hadoop-yarn-applications-distributedshell-2.0.4-Intel.jar cc_lib/hadoop-yarn-applications-unmanaged-am-launcher-2.0.4-Intel.jar cc_lib/hadoop-yarn-client-2.0.4-Intel.jar cc_lib/hadoop-yarn-common-2.0.4-Intel.jar cc_lib/hadoop-yarn-server-common-2.0.4-Intel.jar cc_lib/hadoop-yarn-server-nodemanager-2.0.4-Intel.jar cc_lib/hadoop-yarn-server-resourcemanager-2.0.4-Intel.jar cc_lib/hadoop-yarn-server-tests-2.0.4-Intel.jar cc_lib/hadoop-yarn-server-web-proxy-2.0.4-Intel.jar cc_lib/hadoop-yarn-site-2.0.4-Intel.jar cc_lib/pig-withouthadoop.jar"/-->
+			</manifest>
+			<fileset dir="/home/erez/Workspace/co-clustering/bin"/>
+		</jar>
+	</target>
+</project>

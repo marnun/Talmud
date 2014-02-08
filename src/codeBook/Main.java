@@ -21,16 +21,21 @@ import codeBook.phases.RunPhase;
 
 
 public class Main extends Configured implements Tool{
-	public static void main(String[] args) {
-		if (args.length<12){
-			System.out.println("Usage: <phase number(1,2,3)> " +
-					"<input dir> <output dir> <codebook url> " +
+	public static void main(String[] arg1) {
+		if (arg1.length<12){
+			System.out.println("Usage: " +
 					"<K> <L> <start_iteration> <epsilon> <maxIterations>" +
 					"<TraindataPath> <ValidationdataPath> <seperator> <prefix>");
 		}
+		
+		String[] args = new String[13];
+		for (int i = 0; i < arg1.length; i++){
+			args[i+4] = arg1[i];
+		}
+		
 		int K=Integer.parseInt(args[4]);
 		int L=Integer.parseInt(args[5]);
-		int iteration = 1;//Integer.parseInt(args[6]);
+		int iteration = Integer.parseInt(args[6]);
 		double epsilon = Double.parseDouble(args[7]);
 		int maxIterations = Integer.parseInt(args[8]);
 		

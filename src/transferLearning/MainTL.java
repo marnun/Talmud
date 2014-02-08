@@ -47,14 +47,14 @@ public class MainTL {
 	String bUrl;
 	private double epsilon;
 	private int maxIterations;
-	public MainTL(String prefix, String trainDataPath, String validationDataPath, char seperator, int vColIndex,
-			String initialSchema, int k,int l, String[] codebooksPaths,int bXCol, int bYCol, double epsilon,int maxIterations) throws Exception {
+	public MainTL(String prefix, String trainDataPath, String validationDataPath, char seperator, 
+			String initialSchema, int k,int l, String[] codebooksPaths,int bXCol, int bYCol, 
+			double epsilon,int maxIterations) throws Exception {
 		super();
 		this.codeBookPaths = codebooksPaths;
 		this.trainDataPath = trainDataPath;
 		this.validationDataPath = validationDataPath;
 		this.seperator = seperator;
-		this.vColIndex = vColIndex;
 		this.initialSchema = initialSchema;
 		this.L = l;
 		this.K = k;
@@ -344,6 +344,16 @@ public class MainTL {
 
 	public static void main(String[] args) throws Exception{
 
+		
+		/**
+		 * this main should get the folowing arguments:
+		 * <prefix> <trainDataPath> <validationDataPath> <seperator>
+		 * <schema> <K> <L> <codebooksPaths> <B_User_column> <B_Item_column>
+		 * <epsilon><maxIterations>
+		 * schema should look like: "uid:int,iid:int,rating:int,unixtime:int"
+		 * codebooksPaths should be comma seperated values, (i.e. data/b0/,data/b1/)
+		 * 
+		 */
 
 		if (args.length < 13){
 			System.err.println("");
@@ -354,27 +364,26 @@ public class MainTL {
 		//deleteOldFiles();
 		//args[0];
 
-		String prefix = "data/";//args[0];
-		String trainDataPath = "u.data";//args[1];
-		String validationDataPath = "u.data";//args[2];
+		String prefix = args[0];//"data/";
+		String trainDataPath = args[1];// "u.data";//
+		String validationDataPath = args[2];//"u.data";//
 		if (args[3].length() != 1){
 			System.err.println("the seperator can be only of size 1, valus such \t, \n should be in a quoats: '\t' ");
 			System.exit(-1);
 		}
-		char seperator = '\t'; //args[3].charAt(0);
-		int vColIndex = 1;//Integer.parseInt(c);
-		String schema = "uid:int,iid:int,rating:int,unixtime:int";//args[5]
+		char seperator = args[3].charAt(0);//'\t'; //args[3].charAt(0);
+		String schema = args[4];//"uid:int,iid:int,rating:int,unixtime:int";//
 		
-		int K = 20;//Integer.parseInt(args[6]);
-		int L = 20;//Integer.parseInt(args[7]);
-		String[] codebooksPaths = new String[]{"data/b0/","data/b1/"};//args[8].split(",");
+		int K = Integer.parseInt(args[5]);//20;//
+		int L = Integer.parseInt(args[6]);//20;//
+		String[] codebooksPaths = args[7].split(",");//new String[]{"data/b0/","data/b1/"};//
 		
-		int bUCol = 0;//Integer.parsInt(args[9]); // this represent the user column in the codebooks files.
-		int bVCol = 1;//Integer.parsInt(args[10]); // this represent the items column in the codebooks files.
-		double epsilon = 0.1;//Double.parseDouble(args[11]);
-		int maxIterations = 20;//Integer.parsInt(args[12]); // this represent the maximum number of iterations in the algorithm 
+		int bUCol = Integer.parseInt(args[8]); //0;// this represent the user column in the codebooks files.
+		int bVCol = Integer.parseInt(args[9]);//1; // this represent the items column in the codebooks files.
+		double epsilon = Double.parseDouble(args[10]);//0.1;
+		int maxIterations = Integer.parseInt(args[11]); //20;// this represent the maximum number of iterations in the algorithm 
 		
-		MainTL mainTL = new MainTL(prefix,trainDataPath,validationDataPath, seperator, vColIndex , schema, K, L, codebooksPaths, bUCol, bVCol, epsilon,maxIterations);
+		MainTL mainTL = new MainTL(prefix,trainDataPath,validationDataPath, seperator , schema, K, L, codebooksPaths, bUCol, bVCol, epsilon,maxIterations);
 		mainTL.run();
 	}
 
